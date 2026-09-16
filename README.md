@@ -25,8 +25,6 @@ The method has an offline phase that samples contrasting trajectories, abstracts
   <img src="assets/method/method_20260824.png" width="100%" alt="GUI-PRA method overview">
 </p>
 
-<p align="center"><a href="assets/method/method_20260824.pdf">Download the method figure as PDF</a></p>
-
 ## 🌟 Key Features
 
 ### 🧩 Controller + worker architecture
