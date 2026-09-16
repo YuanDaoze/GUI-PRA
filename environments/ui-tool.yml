@@ -1,0 +1,6 @@
+name: gui-pra-ui-tool
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip

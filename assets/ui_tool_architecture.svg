@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="440" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+  <title id="title">GUI-PRA UI-Tool architecture</title>
+  <desc id="desc">A controller dispatches image requests to Point, OmniParser and ZoomInSubfigure workers. The workers use Molmo, OmniParser and Florence, or an external Qwen vision API.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker>
+    <style>
+      .box{stroke:#334155;stroke-width:2;rx:16;ry:16}.label{font-family:Inter,Arial,sans-serif;fill:#0f172a}.title{font-size:21px;font-weight:700}.body{font-size:16px}.small{font-size:14px;fill:#475569}.arrow{stroke:#475569;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1100" height="440" fill="#f8fafc"/>
+  <text x="42" y="45" class="label title">GUI-PRA UI-Tool server</text>
+  <text x="42" y="72" class="label small">One controller, independent workers, and OpenAI-compatible vision APIs</text>
+
+  <rect x="40" y="165" width="210" height="112" fill="#dbeafe" class="box"/>
+  <text x="145" y="205" text-anchor="middle" class="label title">Controller</text>
+  <text x="145" y="232" text-anchor="middle" class="label body">discovery + dispatch</text>
+  <text x="145" y="258" text-anchor="middle" class="label small">POST /list_models</text>
+
+  <rect x="355" y="105" width="210" height="94" fill="#dcfce7" class="box"/>
+  <text x="460" y="143" text-anchor="middle" class="label title">Point</text>
+  <text x="460" y="171" text-anchor="middle" class="label body">Molmo grounding</text>
+  <rect x="355" y="217" width="210" height="94" fill="#fef3c7" class="box"/>
+  <text x="460" y="255" text-anchor="middle" class="label title">omni_parser</text>
+  <text x="460" y="283" text-anchor="middle" class="label body">OCR + global UI map</text>
+  <rect x="355" y="329" width="210" height="72" fill="#fce7f3" class="box"/>
+  <text x="460" y="359" text-anchor="middle" class="label title">ZoomInSubfigure</text>
+  <text x="460" y="383" text-anchor="middle" class="label small">local crop</text>
+
+  <rect x="720" y="105" width="320" height="94" fill="#e0e7ff" class="box"/>
+  <text x="880" y="143" text-anchor="middle" class="label title">Local model assets</text>
+  <text x="880" y="171" text-anchor="middle" class="label body">Molmo · YOLO · Florence-2</text>
+  <rect x="720" y="217" width="320" height="94" fill="#ede9fe" class="box"/>
+  <text x="880" y="255" text-anchor="middle" class="label title">Vision API</text>
+  <text x="880" y="283" text-anchor="middle" class="label body">Qwen3-VL /v1/chat/completions</text>
+  <rect x="720" y="329" width="320" height="72" fill="#e2e8f0" class="box"/>
+  <text x="880" y="359" text-anchor="middle" class="label title">Client</text>
+  <text x="880" y="383" text-anchor="middle" class="label small">GUI-PRA · custom applications</text>
+
+  <path d="M250 220H350" class="arrow"/>
+  <path d="M565 151H715" class="arrow"/>
+  <path d="M565 264H715" class="arrow"/>
+  <path d="M565 365H715" class="arrow"/>
+  <path d="M720 365H580" class="arrow"/>
+  <path d="M720 264H580" class="arrow"/>
+  <path d="M720 151H580" class="arrow"/>
+  <text x="296" y="207" class="label small">worker HTTP</text>
+  <text x="625" y="137" class="label small">local weights</text>
+  <text x="620" y="250" class="label small">region request</text>
+</svg>

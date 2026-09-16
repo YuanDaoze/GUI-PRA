@@ -1,0 +1,43 @@
+# Paths are resolved from this release root. All worker outputs stay in runtime_dir.
+base_dir: "${PROJECT_ROOT}/UI_Tool"
+runtime_dir: "${UI_TOOL_RUNTIME_DIR:-runtime/ui-tool}"
+startup_timeout: 900
+retry_interval: 1
+controller_config:
+  worker_name: controller
+  cmd:
+    script-addr: online_workers/controller.py
+    host: "${UI_TOOL_HOST:-127.0.0.1}"
+    port: "${UI_TOOL_CONTROLLER_PORT:-20001}"
+tool_worker_config:
+  - Point:
+      worker_name: Point
+      registered_name: Point
+      cuda_visible_devices: "${POINT_GPU:-0}"
+      cmd:
+        script-addr: online_workers/molmo_point_worker_test.py
+        host: "${UI_TOOL_HOST:-127.0.0.1}"
+        port: "${POINT_PORT:-20027}"
+        model_path: "${MOLMO_MODEL_PATH:-/path/to/Molmo-7B-D-0924}"
+        limit-model-concurrency: 1
+  - OmniParser:
+      worker_name: OmniParser
+      registered_name: omni_parser
+      cuda_visible_devices: "${OMNIPARSER_GPU:-1}"
+      cmd:
+        script-addr: online_workers/omni_parser_worker.py
+        host: "${UI_TOOL_HOST:-127.0.0.1}"
+        port: "${OMNIPARSER_PORT:-20030}"
+        som-model-path: "${OMNIPARSER_DETECT_PATH:-/path/to/OmniParser-v2.0/icon_detect/model.pt}"
+        caption-model-path: "${OMNIPARSER_CAPTION_PATH:-/path/to/OmniParser-caption-bundle}"
+        limit-model-concurrency: 1
+  - ZoomInSubfigure:
+      worker_name: ZoomInSubfigure
+      registered_name: ZoomInSubfigure
+      cuda_visible_devices: ""
+      cmd:
+        script-addr: online_workers/SelectSubplot_worker.py
+        host: "${UI_TOOL_HOST:-127.0.0.1}"
+        port: "${ZOOM_PORT:-20039}"
+        api-url: "${ZOOM_API_URL:-http://127.0.0.1:8008/v1/chat/completions}"
+        llm-model-name: "${ZOOM_MODEL_NAME:-qwen3-vl-32b-instruct}"
